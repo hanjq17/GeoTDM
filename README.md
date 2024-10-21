@@ -66,7 +66,7 @@ python experiments/nbody_sampling.py --eval_yaml_file configs/nbody_sampling.yam
 ```
 Evaluation:
 ```python
-python -m experiments.scores --path outputs/nbody_GeoTDM_uncond/samples.pkl
+python -m experiments.scores --path outputs/nbody_GeoTDM_uncond_eval/samples.pkl
 ```
 
 
@@ -100,7 +100,7 @@ python experiments/md17_sampling.py --eval_yaml_file configs/md17_sampling.yaml
 ```
 Evaluation:
 ```python
-python -m experiments.scores --path outputs/md17_aspirin_GeoTDM_uncond/samples.pkl --chem
+python -m experiments.scores --path outputs/md17_aspirin_GeoTDM_uncond_eval/samples.pkl --chem
 ```
 
 ### Pedestrian Trajectory Forecasting
