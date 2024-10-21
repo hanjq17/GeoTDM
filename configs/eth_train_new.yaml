@@ -1,0 +1,54 @@
+data:
+  train:
+    dataset: 'eth'
+    past_frames: 8
+    future_frames: 12
+    traj_scale: 1  # The same as EqMotion paper
+    phase: 'training'
+  test:
+    dataset: 'eth'
+    past_frames: 8
+    future_frames: 12
+    traj_scale: 1.4  # The same as EqMotion paper
+    phase: 'testing'
+
+wandb:
+  wandb_usr: 'geometric_ai'
+  no_wandb: true
+  project: 'traj_eth'
+
+denoise_model:
+  n_layers: 4
+  node_dim: 2
+  edge_dim: 0
+  hidden_dim: 64
+  time_emb_dim: 32
+  act_fn: 'silu'
+  learn_ref_frame: true
+  n_layers_ref: 2
+  num_w: 12
+  pre_norm: true
+
+diffusion:
+  beta_schedule_name: 'linear'
+  num_timesteps: 100
+
+train:
+  exp_name: 'eth_GeoTDM'
+  output_base_path: 'outputs/'
+  seed: 1
+  cond_mask: [[0, 8]]
+  num_epochs: 100
+  batch_size: 100
+  eval_batch_size: 1024
+  lr: 0.0005
+  save_model: true
+  save_every_epoch: 50
+  eval_every_epoch: 2
+  log_every_step: 20
+  final_test: true
+  final_test_ckpt: 'best'
+  K: 60
+  lr_decay_every: 10
+  cluster: true
+

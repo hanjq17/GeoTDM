@@ -1,0 +1,72 @@
+data:
+  train:
+    root: 'datasets/datagen'
+    name: 'nbody_train'
+    suffix: 'train_charged5_initvel1'
+#    name: 'spring_train'
+#    suffix: 'train_springs5_initvel1'
+#    name: 'gravity_train'
+#    suffix: 'train_gravity10_initvel1'
+    force_length: 3000
+    span: 30
+
+  val:
+    root: 'datasets/datagen'
+    name: 'nbody_valid'
+    suffix: 'valid_charged5_initvel1'
+#    name: 'spring_valid'
+#    suffix: 'valid_springs5_initvel1'
+#    name: 'gravity_valid'
+#    suffix: 'valid_gravity10_initvel1'
+    span: 30
+    force_length: 256
+
+  test:
+    root: 'datasets/datagen'
+    name: 'nbody_test'
+    suffix: 'test_charged5_initvel1'
+#    name: 'spring_test'
+#    suffix: 'test_springs5_initvel1'
+#    name: 'gravity_test'
+#    suffix: 'test_gravity10_initvel1'
+    span: 30
+    return_index: true
+
+
+wandb:
+  wandb_usr: 'geometric_ai'
+  no_wandb: true
+  project: 'traj_nbody'
+
+denoise_model:
+  n_layers: 6
+  node_dim: 1
+  edge_dim: 1
+  hidden_dim: 128
+  time_emb_dim: 32
+  act_fn: 'silu'
+  learn_ref_frame: true  # false if uncond or ablations
+  n_layers_ref: 2
+  num_w: 20  # span - len(cond_mask): 30 - 10 = 20
+
+diffusion:
+  beta_schedule_name: 'linear'
+  num_timesteps: 1000
+
+train:
+  exp_name: 'nbody_GeoTDM_cond'
+  output_base_path: 'outputs/'
+  seed: 1
+  cond_mask: [[0, 10]]
+  num_epochs: 4000
+  batch_size: 128
+  eval_batch_size: 512
+  lr: 0.0001
+  save_model: true
+  save_every_epoch: 400
+  eval_every_epoch: 100
+  log_every_step: 20
+  final_test: true
+  final_test_ckpt: 'best'  # Should be in ['last', 'best', epoch]
+  K: 5
+

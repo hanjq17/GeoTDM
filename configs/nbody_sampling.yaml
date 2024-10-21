@@ -1,0 +1,27 @@
+data:
+  root: 'datasets/datagen'
+  name: 'nbody_test'
+  suffix: 'test_charged5_initvel1'
+  span: 30
+  return_index: true
+  project: true  # true for uncond generation
+
+wandb:
+  wandb_usr: 'geometric_ai'
+  no_wandb: true
+  project: 'traj_nbody'
+
+eval:
+  train_exp_name: 'nbody_uncond20'  # The name of the training exp
+  model_ckpt: 'best'  # train_output_base_path/train_exp_name/ckpt_{model_ckpt}.pt
+  eval_exp_name: null  # Default: train_exp_name + '_eval'
+  output_base_path: 'outputs/'  # Should be the same as training
+  cond_mask: null  # Default: The same as training
+  cond: false
+  seed: 100
+  model: 'GeoTDM'
+
+  batch_size: 128
+  sampling_timesteps: 1000  # Default: The same as training
+
+
