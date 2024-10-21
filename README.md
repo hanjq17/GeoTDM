@@ -49,6 +49,7 @@ python -m torch.distributed.launch \
 ```
 
 By default, we use 4 GPUs for training. You can change the number of GPUs by modifying `--nproc_per_node`.
+You can also enable `wandb` to monitor training by changing `no_wandb` to `False` in the config file.
 
 #### Unconditional Generation
 Training:

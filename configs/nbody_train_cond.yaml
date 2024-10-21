@@ -34,7 +34,7 @@ data:
 
 
 wandb:
-  wandb_usr: 'geometric_ai'
+  wandb_usr: 'YOUR_USER_NAME'
   no_wandb: true
   project: 'traj_nbody'
 
