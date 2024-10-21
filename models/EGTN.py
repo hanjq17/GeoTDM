@@ -65,13 +65,12 @@ class EGTN(nn.Module):
 
     def forward(self, diffusion_t, x, h, edge_index, edge_attr, batch, **model_kwargs):
         """
-        :param diffusion_t: shape [BN,]
+        :param diffusion_t: The diffusion time step, shape [BN,]
         :param x: shape [BN, 3, T]
         :param h: shape [BN, H] or [BN, H, T]
         :param edge_index: shape [2, BM]
         :param edge_attr: shape [BM, He]
         :param batch: shape [BN]
-        :return:
         """
 
         compute_ref = model_kwargs.get('compute_ref', False)
@@ -168,7 +167,8 @@ if __name__ == '__main__':
     H = 32
     T = 10
 
-    model = EGTN(n_layers=3, node_dim=Hh, edge_dim=He, hidden_dim=H, time_emb_dim=64, act_fn=nn.SiLU())
+    model = EGTN(n_layers=3, node_dim=Hh, edge_dim=He, hidden_dim=H, time_emb_dim=64, act_fn='silu',
+                 learn_ref_frame=False, n_layers_ref=2, num_w=10, scale=1, pre_norm=False)
 
     batch = torch.from_numpy(np.array([0, 0, 0, 1, 1])).long()
     row = [0, 0, 1, 3]

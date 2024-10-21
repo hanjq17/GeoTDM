@@ -18,16 +18,16 @@ GeoTDM demonstrates strong performance in modeling geometric trajectories across
 ![Overview](assets/framework.png "Overview")
 
 ## Dependencies
-
+We use `python==3.8.18` for our experiments with the following core packages:
 ```
-python==3.8.18
 torch==1.13.0
 torch-geometric==2.4.0
 scikit-learn==1.3.2
 networkx==3.1
 pandas==2.0.3
-wandb==0.16.0
+einops==0.7.0
 ```
+Other packages like `wandb`, `torch-scatter`, `torch-sparse`, `torch-kmeans` are also recommended to install for full functionality.
 
 ## Experiments
 
@@ -115,6 +115,11 @@ python -m torch.distributed.launch \
     experiments/eth_train_new.py \
     --train_yaml_file configs/eth_train_new.yaml
 ```
+
+## Generated Samples
+
+![Samples](assets/geotdm_samples_gif.gif "Generated Samples")
+
 
 
 ## Citation
