@@ -1,6 +1,8 @@
 # Geometric Trajectory Diffusion Models (NeurIPS 2024)
 
-Jiaqi Han, Minkai Xu, Aaron Lou, Haotian Ye, Stefano Ermon
+**Jiaqi Han, Minkai Xu, Aaron Lou, Haotian Ye, Stefano Ermon**
+
+**Stanford University**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/hanjq17/GeoTDM/blob/main/LICENSE)
 [![ArXiv](https://img.shields.io/static/v1?&logo=arxiv&label=Paper&message=Arxiv:GeoTDM&color=B31B1B)](https://arxiv.org/abs/2410.13027)
