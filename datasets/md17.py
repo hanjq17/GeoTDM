@@ -84,11 +84,6 @@ class MD17Traj(TrajDataset):
         self.z = torch.Tensor(self.data[2])  # [N]
         self.edges = torch.Tensor(self.data[3])  # [N, N]
 
-        # h = self.z.unsqueeze(-1)
-        # h = torch.zeros_like(h)
-        # self.h = h
-
-
         transform = MD17_Transform(max_atom_type=10, charge_power=2, max_hop=3, cutoff=1.6, fc=self.fc)
         h, edge_index, edge_attr = transform(self.x[0], self.z)  # h dim: max_atom_type * (charge_power + 1)
         self.h, self.edge_index, self.edge_attr = h, edge_index, edge_attr  # edge attr dim: max_hop + 1
@@ -127,22 +122,9 @@ class MD17Traj(TrajDataset):
             _num = min(self.force_length, _num)
         _num = min(_num, self.x.size(0) - self.span + 1)
         return _num
-        # if self.mode == 'train':
-        #     num = self.x.size(0) - self.span + 1
-        #     return num if self.force_length is None else min(self.force_length, num)
-        # else:
-        #     num = self.x.size(0) // self.span
-        #     return num if self.force_length is None else min(self.force_length, num)
 
     def __getitem__(self, idx):  # return a TrajData
-        # idx_start = idx * self.span
-        # if self.mode == 'train':
-        #     idx_start = idx  # Allow overlapping for train
-        # else:
-        #     idx_start = idx * self.span  # Non-overlapping split for val and test
-
         idx_start = idx * self.sample_interval
-
         idx_end = idx_start + self.span
         x = self.x[idx_start: idx_end]  # [_T, N, 3]
         v = self.v[idx_start: idx_end]  # [_T, N, 3]
@@ -159,22 +141,10 @@ class MD17Traj(TrajDataset):
         return data
 
 
-_links = {
-    'aspirin': 'http://www.quantum-machine.org/gdml/data/npz/md17_aspirin.npz',
-    'benzene': 'http://www.quantum-machine.org/gdml/data/npz/md17_benzene2017.npz',
-    'ethanol': 'http://www.quantum-machine.org/gdml/data/npz/md17_ethanol.npz',
-    'malonaldehyde': 'http://www.quantum-machine.org/gdml/data/npz/md17_malonaldehyde.npz',
-    'naphthalene': 'http://www.quantum-machine.org/gdml/data/npz/md17_naphthalene.npz',
-    'salicylic': 'http://www.quantum-machine.org/gdml/data/npz/md17_salicylic.npz',
-    'toluene': 'http://www.quantum-machine.org/gdml/data/npz/md17_toluene.npz',
-    'uracil': 'http://www.quantum-machine.org/gdml/data/npz/md17_uracil.npz',
-}
-
 if __name__ == '__main__':
     molecule = 'aspirin'
     dataset = MD17Traj(root='data/md17', molecule_name=molecule, with_h=True, down_sample_every=10, span=30, mode='train')
     print(dataset[100].x)
-    # exit(0)
     print(len(dataset))
     dataset = MD17Traj(root='data/md17', molecule_name=molecule, with_h=True, down_sample_every=10, span=30, mode='val', force_length=256)
     print(len(dataset))
@@ -182,7 +152,3 @@ if __name__ == '__main__':
     print(len(dataset))
     data = dataset[100]
     print(data)
-    # print(data.x)
-    # print(data.pos[..., 0])
-    # print(data.pos[..., -1])
-    # print(dataset[100])
