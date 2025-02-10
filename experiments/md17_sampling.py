@@ -34,7 +34,10 @@ print(f'Train output path: {train_output_path}')
 set_seed(config.eval.seed)
 
 if config.eval.model == 'GeoTDM':
-    train_yaml_file = os.path.join(train_output_path, 'md17_train.yaml')
+    if cond:
+        train_yaml_file = os.path.join(train_output_path, 'md17_train_cond.yaml')
+    else:
+        train_yaml_file = os.path.join(train_output_path, 'md17_train_uncond.yaml')
 else:
     raise NotImplementedError()
 
