@@ -94,9 +94,6 @@ denoise_network.eval()
 
 all_data = []
 
-all_ADE = []
-all_FDE = []
-
 for step, data in enumerate(dataloader):
     data = data.to(device)
     model_kwargs = {'h': data.h,
@@ -135,11 +132,6 @@ for step, data in enumerate(dataloader):
 
     # break  # break here to only get a few samples
 
-if cond:
-    all_ADE = torch.cat(all_ADE)
-    print(all_ADE.mean().item())
-    all_FDE = torch.cat(all_FDE)
-    print(all_FDE.mean().item())
 
 samples_save_path = os.path.join(eval_output_path, 'samples.pkl')
 with open(samples_save_path, 'wb') as f:
