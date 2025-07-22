@@ -129,9 +129,11 @@ python -m torch.distributed.launch \
 Please consider citing our work if you find it useful:
 ```
 @article{han2024geometric,
-  title={Geometric Trajectory Diffusion Models},
+  title={Geometric trajectory diffusion models},
   author={Han, Jiaqi and Xu, Minkai and Lou, Aaron and Ye, Haotian and Ermon, Stefano},
-  journal={arXiv preprint arXiv:2410.13027},
+  journal={Advances in Neural Information Processing Systems},
+  volume={37},
+  pages={25628--25662},
   year={2024}
 }
 ```
